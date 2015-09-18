@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
+from functools import reduce
+def mysplit(st):
+	return st.split('.')
 
-def char2int(st):
-	return {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9}[s]
+st = '123.456'
+print(st, type(st))
+
+result = reduce(lambda x, y : int(x) + int(y)*(0.1**(len(y))) , mysplit(st))
+print(result, type(result))
+print(reduce(lambda x, y : int(x) + int(y)*(0.1**(len(y))) , mysplit(st))) 
