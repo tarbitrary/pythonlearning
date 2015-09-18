@@ -25,6 +25,7 @@ def get_prime():
 		n = next(t)
 		yield n
 		#过滤掉所有能被序列第一次整除的,得到新序列
+		#filter()函数返回的是一个Iterator
 		t = filter(not_divisible(n), t)
 
 for n in get_prime():
