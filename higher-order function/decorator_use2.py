@@ -1,12 +1,8 @@
 #!/usr/bin/env python
-#-- coding: utf-8 --
-
-import functools
 
 #装饰函数的使用
 
 def log(func):
-	@functools.wraps(func)
 	def wrapper1(*args, **kw):
 		print("call func %s" %(func.__name__))
 		return func(*args, **kw)
@@ -25,7 +21,6 @@ print(now.__name__)
 
 def log2(text):
 	def decorator(func):
-		@functools.wraps(func)
 		def wrapper(*args, **kw):
 			print("%s func %s" %(text, func.__name__))
 			return func(*args, **kw)
@@ -51,7 +46,6 @@ print(now2.__name__)
 
 def log3(text="tarbitrary"):
 	def decorator3(func):
-		@functools.wraps(func)
 		def wrapper3(*args, **kw):
 			print("%s call func %s" %(text, func.__name__))
 			return func(*args, **kw)
@@ -80,14 +74,12 @@ print(now4.__name__)
 def log4(text=None):
 	if text is None or isinstance(text, str):
 		def decorator4(func):
-			@functools.wraps(func)
 			def wrapper4(*args, **kw):
 				print("%s call func %s"%( text and text or "None param", func.__name__))
 				return func(*args, **kw)
 			return wrapper4
 		return decorator4
 	else:
-		@functools.wraps(text)
 		def wrapper4(*args, **kw):
 			print("%s call func %s" %("taritrary", text.__name__))
 			return text(*args, **kw)
