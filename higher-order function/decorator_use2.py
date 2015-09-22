@@ -1,15 +1,19 @@
 #!/usr/bin/env python
+#-- coding: utf-8 --
+
+import functools
 
 #装饰函数的使用
 
 def log(func):
+	@functools.wraps(func)
 	def wrapper1(*args, **kw):
 		print("call func %s" %(func.__name__))
 		return func(*args, **kw)
 	return wrapper1
 
 """
-@log相当于now = log(now), 此时now指向的是wrapper函数
+@log相当于now = log(now),用functolls模块的wraps包装后 调用结束后会将now的名称置为now
 """
 @log
 def now():
@@ -21,6 +25,7 @@ print(now.__name__)
 
 def log2(text):
 	def decorator(func):
+		@functools.wraps(func)
 		def wrapper(*args, **kw):
 			print("%s func %s" %(text, func.__name__))
 			return func(*args, **kw)
@@ -28,7 +33,7 @@ def log2(text):
 	return decorator
 
 """
-相当于now = log2("call")(now), 此时now指向的是wrapper函数
+相当于now = log2("call")(now),用functolls模块的wraps包装后 调用结束后会将now的名称置为now 
 """
 @log2("call")
 def now2():
@@ -46,6 +51,7 @@ print(now2.__name__)
 
 def log3(text="tarbitrary"):
 	def decorator3(func):
+		@functools.wraps(func)
 		def wrapper3(*args, **kw):
 			print("%s call func %s" %(text, func.__name__))
 			return func(*args, **kw)
@@ -74,12 +80,14 @@ print(now4.__name__)
 def log4(text=None):
 	if text is None or isinstance(text, str):
 		def decorator4(func):
+			@functools.wraps(func)
 			def wrapper4(*args, **kw):
 				print("%s call func %s"%( text and text or "None param", func.__name__))
 				return func(*args, **kw)
 			return wrapper4
 		return decorator4
 	else:
+		@functools.wraps(text)
 		def wrapper4(*args, **kw):
 			print("%s call func %s" %("taritrary", text.__name__))
 			return text(*args, **kw)
