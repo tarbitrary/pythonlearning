@@ -18,5 +18,11 @@ def read2():
 	with open("text.txt", "r") as f:
 		print(f.read())
 
+def read3():
+	with open("text.txt", "r") as f:
+		for line in f.readlines():
+			print(line.strip())
+
 read1()
 read2()
+read3()
